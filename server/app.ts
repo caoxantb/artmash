@@ -1,0 +1,41 @@
+import express from "express";
+import mongoose from "mongoose";
+import "express-async-errors";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+
+//middlewares
+import { MONGODB_URI } from "./utils/config";
+import {
+  requestLogger,
+  unknownEndpoint,
+  errorHandler,
+} from "./utils/middleware";
+
+//routers
+import { usersRouter, galleriesRouter, artpiecesRouter } from "./routes";
+
+const app = express();
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log("connected to MongoDB");
+  })
+  .catch((er) => {
+    console.error("error connecting to MongoDB", er.message);
+  });
+
+app.use(cors({ credentials: true }));
+app.use(cookieParser());
+app.use(express.json());
+app.use(requestLogger);
+
+app.use("/api/users", usersRouter);
+app.use("/api/galleries", galleriesRouter);
+app.use("/api/artpieces", artpiecesRouter);
+
+app.use(unknownEndpoint);
+app.use(errorHandler);
+
+export default app;

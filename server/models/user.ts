@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
   name: String,
   passwordHash: String,
   avatarImg: String,
-  galleries: [{ type: String, ref: "Gallery" }],
 });
 
 userSchema.plugin(uniqueValidator)

@@ -24,7 +24,7 @@ usersRouter.post(
   "/signin",
   async (req: express.Request, res: express.Response) => {
     const { username, password } = req.body;
-    const token = signIn({ username, password });
+    const token = await signIn({ username, password });
     if (!token) {
       return res.status(401).json({
         error: "invalid username or password",

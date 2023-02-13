@@ -45,7 +45,7 @@ galleriesRouter.get(
 );
 
 galleriesRouter.get(
-  "/:userId",
+  "/user/:userId",
   async (req: express.Request, res: express.Response) => {
     const galleries = await getAllGalleries(req.params.userId);
     res.json(galleries);

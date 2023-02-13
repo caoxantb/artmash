@@ -18,7 +18,7 @@ artpiecesRouter.get(
 );
 
 artpiecesRouter.get(
-  ":/artpieceId",
+  "/:galleryId/:artpieceId",
   async (req: express.Request, res: express.Response) => {
     const artpiece = await getOneArtpiece(req.params.artpieceId);
     res.json(artpiece);
@@ -26,10 +26,11 @@ artpiecesRouter.get(
 );
 
 artpiecesRouter.put(
-  ":/artpieceId",
+  "/:galleryId/:artpieceId",
   async (req: express.Request, res: express.Response) => {
     const artpiece = await updateArtpiecePoints(
       req.params.artpieceId,
+      req.params.galleryId,
       req.body.points
     );
     return artpiece;
@@ -37,7 +38,7 @@ artpiecesRouter.put(
 );
 
 artpiecesRouter.delete(
-  ":/artpieceId",
+  "/:artpieceId",
   async (req: express.Request, res: express.Response) => {
     const user = await getAuthorizedUser(req, res);
 

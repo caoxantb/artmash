@@ -3,10 +3,7 @@ import { User } from "../models";
 
 export const getTokenFrom = (request: any) => {
   const token = request.cookies.access_token;
-  if (token && token.startsWith("Bearer ")) {
-    return token.replace("Bearer ", "");
-  }
-  return null;
+  return token ? token : null
 };
 
 export const getAuthorizedUser = async (request: any, response: any) => {

@@ -30,7 +30,7 @@ const createGallery = async (
   const gallery = await Gallery.create({
     spaceId,
     accessToken,
-    galleryArtpieces,
+    contentTypeGalleryId,
     contentTypeArtpiecesId,
     environmentId,
     user: userId,
@@ -43,18 +43,18 @@ const createGallery = async (
 
 const getAllGalleries = async (user?: string) => {
   const galleries = await Gallery.find(user ? { user } : {});
-  const galleriesData = galleries.map((gallery) => {
+  const galleriesData = galleries.map(async (gallery) => {
     const { spaceId, accessToken, contentTypeGalleryId, environmentId } =
       gallery;
-    const galleryData = getAllEntriesFromContentful(
+    const galleryData = await getAllEntriesFromContentful(
       spaceId,
       accessToken,
       contentTypeGalleryId,
       environmentId
     );
-    return { _id: gallery._id, user: gallery.user, ...galleryData };
+    return { _id: gallery._id, user: gallery.user, ...galleryData[0] };
   });
-  const resolvedGalleriesData = Promise.all(galleriesData);
+  const resolvedGalleriesData = await Promise.all(galleriesData);
 
   return resolvedGalleriesData;
 };

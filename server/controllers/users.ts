@@ -34,7 +34,7 @@ const signIn = async ({
   password: string;
 }) => {
   const user = await User.findOne({ username });
-  const passwordCorrect = user
+  const passwordCorrect = !user
     ? false
     : await bcrypt.compare(password, user.passwordHash);
 

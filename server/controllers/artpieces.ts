@@ -8,14 +8,16 @@ import {
 const getAllArtpiecesInOneGallery = async (galleryId: string) => {
   //artpiece like, all with metadata
   const gallery = await Gallery.findById(galleryId);
-  const { spaceId, accessToken, contentTypeGalleryId, environmentId } = gallery;
+  const { spaceId, accessToken, contentTypeArtpiecesId, environmentId } = gallery;
+
+  console.log(gallery)
 
   //TODO: include id and points to result
 
   const artpieces = await getAllEntriesFromContentful(
     spaceId,
     accessToken,
-    contentTypeGalleryId,
+    contentTypeArtpiecesId,
     environmentId
   );
 
@@ -43,10 +45,10 @@ const getOneArtpiece = async (artpieceId: string) => {
   };
 };
 
-const updateArtpiecePoints = async (artpieceId: string, points: number) => {
+const updateArtpiecePoints = async (artpieceId: string, galleryId: string, points: number) => {
   const artpiece = await Artpiece.findByIdAndUpdate(
     artpieceId,
-    { points },
+    { points, gallery: galleryId },
     { upsert: true }
   );
   return artpiece;

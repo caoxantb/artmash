@@ -22,6 +22,6 @@ const gallerySchema = new mongoose.Schema({
   environmentId: String,
 });
 
-const Gallery = mongoose.model<IGallery>("Track", gallerySchema);
+const Gallery = mongoose.model<IGallery>("Gallery", gallerySchema);
 
 export default Gallery;

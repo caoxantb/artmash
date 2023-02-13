@@ -20,11 +20,11 @@ export const getAllEntriesFromContentful = async (
 
   const rawData = response.items.map(async (res: any) => {
     const fields = res.fields;
-    if (fields.image) {
-      const image = await client.getAsset(fields.image.sys.id);
-      const imageUrl = image.fields.file.url;
-      return { ...fields, image: imageUrl};
-    }
+    Object.keys(fields).map((key) => {
+      if (fields[key].sys?.type === "Asset") {
+        fields[key] = fields[key].fields.file.url;
+      }
+    });
     return fields;
   });
 
@@ -68,14 +68,15 @@ export const getEntryFromContentful = async (
     accessToken: accessToken,
   });
 
-  const response = await client.getEntry(entryId)
+  const response = await client.getEntry(entryId);
 
   const fields: any = response.fields;
-  if (fields.image) {
-    const image = await client.getAsset(fields.image.sys.id);
-    const imageUrl = image.fields.file.url;
-    return { ...fields, image: imageUrl };
-  }
-  return { ...fields };
-};
+  Object.keys(fields).map((key) => {
+    if (fields[key].sys?.type === "Asset") {
+      fields[key] = fields[key].fields.file.url;
+    }
+  });
+  return fields;
 
+  return fields;
+};

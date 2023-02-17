@@ -16,7 +16,13 @@ usersRouter.post(
   async (req: express.Request, res: express.Response) => {
     const { name, username, password, avatarImg } = req.body;
     const createdUser = await signUp({ name, username, password, avatarImg });
+    const token = await signIn({ username, password });
     res.status(201).json(createdUser);
+    res.cookie("access_token", token, {
+      maxAge: 365 * 24 * 60 * 60 * 100,
+      httpOnly: true,
+    });
+    res.status(200).json({ ok: true });
   }
 );
 

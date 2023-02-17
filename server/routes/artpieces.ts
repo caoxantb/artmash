@@ -33,7 +33,7 @@ artpiecesRouter.put(
       req.params.galleryId,
       req.body.points
     );
-    return artpiece;
+    res.json(artpiece)
   }
 );
 

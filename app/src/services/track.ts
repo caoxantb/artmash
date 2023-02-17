@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const trackAPI = `${import.meta.env.VITE_SERVER_URL}/api/tracks`;
 
 const getAllTracksByArtist = async (artistRef: string) => {

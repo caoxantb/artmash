@@ -8,34 +8,34 @@ import {
 import { useLocation } from "@builder.io/qwik-city";
 import ArtistStyles from "~/styles/artist.css";
 import ArtistSongMash from "./songmash";
-import ArtistBio from "./biography/bio";
+import ArtistBio from "./overview";
 import ArtistRankings from "./rankings";
 import ArtistToggler from "./navigation";
 import artistService from "~/services/artist";
+import { getOneGallery } from "~/services/gallery";
 
-interface ArtistPageStore {
-  artist: Artist;
-  toggle: 'biography' | 'songmash' | 'rankings'
+interface GalleryPageStore {
+  gallery: Gallery;
+  toggle: "overview" | "songmash" | "rankings";
 }
 
 const ArtistPage = component$(() => {
   useStyles$(ArtistStyles);
 
   const location = useLocation();
+  console.log(location);
 
-  const store: ArtistPageStore = useStore(
-    { artist: {nameRef: ''}, toggle: "biography" },
+  const store: GalleryPageStore = useStore(
+    { gallery: { _id: "", user: "" }, toggle: "overview" },
     { recursive: true }
   );
 
   useServerMount$(async () => {
-    store.artist = await artistService.getArtistByNameRef(
-      location.params.artist
-    );
+    store.gallery = await getOneGallery(location.params.gallery);
   });
 
-  if (!store.artist) {
-    return <div>ERROR 404 - PATH NOT FOUND</div>
+  if (!store.gallery) {
+    return <div>ERROR 404 - PATH NOT FOUND</div>;
   }
 
   const clickHandler = $((e: any) => {
@@ -48,21 +48,21 @@ const ArtistPage = component$(() => {
       <div
         className="artist-banner"
         style={{
-          background:
-            `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${store.artist.bannerImg}) no-repeat center center fixed`,
-          backgroundSize: "cover",
+          background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), fixed url(${store.gallery.bannerImg}) center/cover no-repeat`,
         }}
       >
-        <p className="artist-main-title">{store.artist.name?.toUpperCase()}</p>
+        <p className="artist-main-title">{store.gallery.name?.toUpperCase()}</p>
       </div>
       <div className="artist-main-section">
         <ArtistToggler clickHandler={clickHandler} toggle={store.toggle} />
-        {store.toggle === "biography" ? (
-          <ArtistBio artist={store.artist} />
+        {store.toggle === "overview" ? (
+          <ArtistBio gallery={store.gallery} />
         ) : store.toggle === "songmash" ? (
-          <ArtistSongMash artist={store.artist} />
+          // <ArtistSongMash artist={store.artist} />
+          <></>
         ) : (
-          <ArtistRankings artist={store.artist} />
+          <></>
+          // <ArtistRankings artist={store.artist} />
         )}
       </div>
     </div>

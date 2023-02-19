@@ -4,34 +4,35 @@ import {
   useStore,
   useMount$,
 } from "@builder.io/qwik";
+import Banner from "./Banner";
+import HomeGalleries from "./HomeGalleries";
 import HomeStyles from "~/styles/home.css";
-import ArtistsGrid from "./artists";
-import Banner from "./banner";
-import artistService from "~/services/artist";
+import { getAllGalleries } from "~/services/gallery";
 
-interface ArtistsGridStore {
-  artists: Artists;
+interface GalleriesGridStore {
+  galleries: Galleries;
 }
 
 const Home = component$(() => {
   useStyles$(HomeStyles);
 
-  const store: ArtistsGridStore = useStore(
+  const store: GalleriesGridStore = useStore(
     {
-      artists: [],
+      galleries: []
     },
     { recursive: true }
   );
 
   useMount$(async () => {
-    store.artists = await artistService.getAllArtists();
-    console.log(store.artists)
+    store.galleries = await getAllGalleries();
   });
+
+  console.log(store.galleries)
 
   return (
     <div className="home">
       <Banner />
-      <ArtistsGrid artists={store.artists} />
+      <HomeGalleries galleries={store.galleries} />
     </div>
   );
 });

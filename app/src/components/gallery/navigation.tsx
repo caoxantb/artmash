@@ -2,20 +2,20 @@ import { component$, QRL} from "@builder.io/qwik";
 
 interface ArtistTogglerProps {
   clickHandler: QRL<(e: any) => void>;
-  toggle: 'biography' | 'songmash' | 'rankings'
+  toggle: 'overview' | 'songmash' | 'rankings'
 }
 
 const ArtistToggler = component$(({ clickHandler, toggle }: ArtistTogglerProps) => {
   return (
     <div className="artist-toggler">
       <div
-        id="biography"
+        id="overview"
         className={`artist-toggle-section ${
-          toggle === "biography" ? "active" : ""
+          toggle === "overview" ? "active" : ""
         }`}
         onClick$={clickHandler}
       >
-        BIOGRAPHY
+        OVERVIEW
       </div>
       <div
         id="songmash"

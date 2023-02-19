@@ -1,12 +1,9 @@
 .home {
   text-align: center;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("https://i.imgur.com/sY3wJLt.jpg") no-repeat center center fixed;
-  /* Full height */
+    fixed url("https://i.imgur.com/sY3wJLt.jpg") center/cover no-repeat;
   height: 100%;
   min-height: 100vh;
-  /* Center and scale the image nicely */
-  background-size: cover;
   color: whitesmoke;
 }
 
@@ -59,6 +56,7 @@
   width: 100%;
   border-radius: 50%;
   margin-bottom: 20px;
+  aspect-ratio: 1 / 1;
   filter: drop-shadow(0 0 20px crimson);
 }
 

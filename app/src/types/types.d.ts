@@ -1,36 +1,36 @@
 type Artist = {
-	name?: string,
-  nameRef: string,
-  playlistURL?: string,
-  bannerImg?: string,
-  avatarImg?: string,
-  activeYears?: string,
-  description?: string,
-  members?: [string],
-}
+  name?: string;
+  nameRef: string;
+  playlistURL?: string;
+  bannerImg?: string;
+  avatarImg?: string;
+  activeYears?: string;
+  description?: string;
+  members?: [string];
+};
 
-type Artists = [Artist] | []
+type Artists = [Artist] | [];
 
 type Track = {
-  _id: string,
-  index?: number,
-  title?: string,
-  artist?: string,
+  _id: string;
+  index?: number;
+  title?: string;
+  artist?: string;
   release?: {
-    discType: string,
-    title: string,
-  },
-  year?: number,
-  duration?: string,
-  image?: string,
-  src?: string,
-  points?: number,
-}
+    discType: string;
+    title: string;
+  };
+  year?: number;
+  duration?: string;
+  image?: string;
+  src?: string;
+  points?: number;
+};
 
-type Tracks = [Track] | []
+type Tracks = [Track] | [];
 
 interface IArtist {
-  artist: Artist
+  artist: Artist;
 }
 
 type Mash = {
@@ -38,4 +38,17 @@ type Mash = {
   artistRef: String;
   leftWin: Number;
   rightWin: Number;
-}
+};
+
+type Gallery = {
+  _id: string;
+  user: string;
+  name?: string;
+  bannerImg?: string;
+  avatarImg?: string;
+  description?: string;
+  summary?: string;
+  entryId?: string;
+};
+
+type Galleries = [Gallery] | []

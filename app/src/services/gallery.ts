@@ -1,4 +1,4 @@
-const galleryAPI = "http://localhost:8500/api/gallery";
+const galleryAPI = "http://localhost:8500/api/galleries";
 
 const createGallery = async (
   spaceId: string,

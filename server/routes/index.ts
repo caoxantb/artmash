@@ -1,5 +1,5 @@
 import usersRouter from "./users";
 import galleriesRouter from "./galleries";
-import artpiecesRouter from "./artpieces";
+import filmsRouter from "./films";
 
-export { usersRouter, galleriesRouter, artpiecesRouter };
+export { usersRouter, galleriesRouter, filmsRouter };

@@ -13,7 +13,7 @@ import {
 } from "./utils/middleware";
 
 //routers
-import { usersRouter, galleriesRouter, artpiecesRouter } from "./routes";
+import { usersRouter, galleriesRouter, filmsRouter } from "./routes";
 
 const app = express();
 
@@ -33,7 +33,7 @@ app.use(requestLogger);
 
 app.use("/api/users", usersRouter);
 app.use("/api/galleries", galleriesRouter);
-app.use("/api/artpieces", artpiecesRouter);
+app.use("/api/films", filmsRouter);
 
 app.use(unknownEndpoint);
 app.use(errorHandler);

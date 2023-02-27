@@ -9,21 +9,21 @@ const createGallery = async (
     spaceId,
     accessToken,
     contentTypeGalleryId,
-    contentTypeArtpiecesId,
+    contentTypeFilmsId,
     environmentId,
   }: {
     spaceId: string;
     accessToken: string;
     contentTypeGalleryId: string;
-    contentTypeArtpiecesId: string;
+    contentTypeFilmsId: string;
     environmentId: string;
   },
   userId: string
 ) => {
-  const galleryArtpieces = await getEntriesIdFromContentful(
+  const galleryFilms = await getEntriesIdFromContentful(
     spaceId,
     accessToken,
-    contentTypeArtpiecesId,
+    contentTypeFilmsId,
     environmentId
   );
 
@@ -31,10 +31,10 @@ const createGallery = async (
     spaceId,
     accessToken,
     contentTypeGalleryId,
-    contentTypeArtpiecesId,
+    contentTypeFilmsId,
     environmentId,
     user: userId,
-    artpiecesId: galleryArtpieces,
+    filmsId: galleryFilms,
     _id: `${spaceId}-${contentTypeGalleryId}`,
   });
 
@@ -71,7 +71,7 @@ const getOneGallery = async (id: string) => {
   const galleryData = {
     _id: gallery._id,
     user: gallery.user,
-    artpiecesId: gallery.artpiecesId,
+    filmsId: gallery.filmsId,
     ...galleryContentfulData[0],
   };
 

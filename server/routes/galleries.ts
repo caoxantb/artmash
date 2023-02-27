@@ -18,7 +18,7 @@ galleriesRouter.post(
       spaceId,
       accessToken,
       contentTypeGalleryId,
-      contentTypeArtpiecesId,
+      contentTypeFilmsId,
       environmentId,
     } = req.body;
 
@@ -27,7 +27,7 @@ galleriesRouter.post(
         spaceId,
         accessToken,
         contentTypeGalleryId,
-        contentTypeArtpiecesId,
+        contentTypeFilmsId,
         environmentId,
       },
       user._id.toString()

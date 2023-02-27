@@ -1,5 +1,5 @@
 import Gallery from "./gallery";
-import Artpiece from "./artpiece";
+import Film from "./film";
 import User from "./user";
 
-export { Gallery, Artpiece, User };
+export { Gallery, Film, User };

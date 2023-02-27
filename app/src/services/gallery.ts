@@ -4,7 +4,7 @@ const createGallery = async (
   spaceId: string,
   accessToken: string,
   contentTypeGalleryId: string,
-  contentTypeArtpiecesId: string,
+  contentTypeFilmsId: string,
   environmentId: string
 ) => {
   const res = await fetch(`${galleryAPI}`, {
@@ -17,7 +17,7 @@ const createGallery = async (
       spaceId,
       accessToken,
       contentTypeGalleryId,
-      contentTypeArtpiecesId,
+      contentTypeFilmsId,
       environmentId,
     }),
     credentials: "include",

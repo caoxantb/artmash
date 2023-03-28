@@ -7,7 +7,6 @@ const getAllFilmsInOneGallery = async (galleryId: string) => {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8",
     },
-    credentials: "include",
   });
 
   const films = await res.json();
@@ -40,7 +39,6 @@ const updateFilmPoints = async (
       "Content-Type": "application/json;charset=UTF-8",
     },
     body: JSON.stringify({ points }),
-    credentials: "include",
   });
 
   const film = await res.json();

@@ -7,7 +7,7 @@ import {
 } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import ArtistStyles from "~/styles/artist.css";
-import ArtistSongMash from "./songmash";
+import FilmMash from "./songmash";
 import ArtistBio from "./overview";
 import ArtistRankings from "./rankings";
 import ArtistToggler from "./navigation";
@@ -23,7 +23,6 @@ const ArtistPage = component$(() => {
   useStyles$(ArtistStyles);
 
   const location = useLocation();
-  console.log(location);
 
   const store: GalleryPageStore = useStore(
     { gallery: { _id: "", user: "" }, toggle: "overview" },
@@ -58,8 +57,7 @@ const ArtistPage = component$(() => {
         {store.toggle === "overview" ? (
           <ArtistBio gallery={store.gallery} />
         ) : store.toggle === "songmash" ? (
-          // <ArtistSongMash artist={store.artist} />
-          <></>
+          <FilmMash gallery={store.gallery} />
         ) : (
           <></>
           // <ArtistRankings artist={store.artist} />

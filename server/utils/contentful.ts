@@ -21,7 +21,7 @@ export const getAllEntriesFromContentful = async (
   const rawData = response.items.map(async (res: any) => {
     const fields = res.fields;
     const entryId = res.sys.id;
-    Object.keys(fields).map((key) => {
+    Object.keys(fields).forEach((key) => {
       if (fields[key].sys?.type === "Asset") {
         fields[key] = fields[key].fields.file.url;
       }
@@ -72,12 +72,10 @@ export const getEntryFromContentful = async (
   const response = await client.getEntry(entryId);
 
   const fields: any = response.fields;
-  Object.keys(fields).map((key) => {
+  Object.keys(fields).forEach((key) => {
     if (fields[key].sys?.type === "Asset") {
       fields[key] = fields[key].fields.file.url;
     }
   });
-  return fields;
-
   return fields;
 };

@@ -8,12 +8,9 @@ import {
 const getAllFilmsInOneGallery = async (galleryId: string) => {
   //film like, all with metadata
   const gallery = await Gallery.findById(galleryId);
-  const { spaceId, accessToken, contentTypeFilmsId, environmentId } =
-    gallery;
+  const { spaceId, accessToken, contentTypeFilmsId, environmentId } = gallery;
 
   const rawFilms = await Film.find({});
-
-  //TODO: include id and points to result
 
   const existedFilms = await getAllEntriesFromContentful(
     spaceId,
@@ -27,7 +24,7 @@ const getAllFilmsInOneGallery = async (galleryId: string) => {
       (rawFilm) => film.entryId === rawFilm._id
     );
     const points = matchedFilm?.points || 1400;
-    return { ...film, points };
+    return { ...film, points, _id: film.entryId };
   });
 
   return allFilms;
@@ -77,9 +74,4 @@ const deleteAnFilm = async (filmId: string, userId: string) => {
   await Film.findByIdAndDelete(filmId);
 };
 
-export {
-  getAllFilmsInOneGallery,
-  getOneFilm,
-  updateFilmPoints,
-  deleteAnFilm,
-};
+export { getAllFilmsInOneGallery, getOneFilm, updateFilmPoints, deleteAnFilm };

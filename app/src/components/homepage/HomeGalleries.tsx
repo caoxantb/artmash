@@ -9,7 +9,7 @@ const HomeGalleries = component$(({ galleries }: HomeGalleriesProps) => {
   return (
     <div className="artists-grid">
       {galleries.map((gallery) => (
-        <HomeGallery gallery={gallery} />
+        <HomeGallery key={gallery._id} gallery={gallery} />
       ))}
     </div>
   );

@@ -6,7 +6,6 @@ import {
   $,
 } from "@builder.io/qwik";
 import ArtistTrackCard from "./track-card";
-import trackService from "~/services/track";
 import { calcEloRating } from "~/helpers/elo-agorithm";
 import ArtistLoadingIcon from "../../icon/loading";
 import { randomizeSongs } from "~/helpers/random-song";

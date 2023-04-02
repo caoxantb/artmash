@@ -1,20 +1,20 @@
 import { component$ } from "@builder.io/qwik";
 
-interface ArtistSortIconProps {
+interface SortIconProps {
   sortBy: {
-    column: "score" | "track" | "release" | "duration";
-    direction: "asc" | "desc" | "none";
+    column: "score" | "film" | "year" | "director" | "country"
+    direction: "asc" | "desc";
   };
-  type: "score" | "track" | "release" | "duration";
+  type: "score" | "film" | "year" | "director" | "country";
 }
 
-const ArtistSortIcon = component$(({ sortBy, type }: ArtistSortIconProps) => {
+const SortIcon = component$(({ sortBy, type }: SortIconProps) => {
   return (
     <svg
       style={{
         marginLeft: "6px",
         visibility:
-          type !== sortBy.column || sortBy.direction === "none"
+          type !== sortBy.column
             ? "hidden"
             : "visible",
         transform: sortBy.direction === "asc" ? "rotate(0)" : "rotate(180deg)",
@@ -33,4 +33,4 @@ const ArtistSortIcon = component$(({ sortBy, type }: ArtistSortIconProps) => {
   );
 });
 
-export default ArtistSortIcon;
+export default SortIcon;

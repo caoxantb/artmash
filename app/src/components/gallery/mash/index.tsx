@@ -5,18 +5,18 @@ import {
   useClientEffect$,
   $,
 } from "@builder.io/qwik";
-import ArtistTrackCard from "./track-card";
-import { calcEloRating } from "~/helpers/elo-agorithm";
-import ArtistLoadingIcon from "../../icon/loading";
-import { randomizeSongs } from "~/helpers/random-song";
+import { calcEloRating } from "~/utils/elo-algorithm";
+import ArtistLoadingIcon from "../../icon/Loading";
+import { randomizeSongs } from "~/utils/random-song";
 import { getAllFilmsInOneGallery, updateFilmPoints } from "~/services/film";
+import FilmCard from "./FilmCard";
 
 interface FilmmashStore {
   indexLeft: number;
   indexRight: number;
-  filmLeft: any;
-  filmRight: any;
-  galleryFilms: any;
+  filmLeft: Film;
+  filmRight: Film;
+  galleryFilms: Films;
   isLoading: boolean;
 }
 
@@ -25,8 +25,8 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
     {
       indexLeft: 0,
       indexRight: 0,
-      filmLeft: {},
-      filmRight: {},
+      filmLeft: {points: 0, _id: ""},
+      filmRight: {points: 0, _id: ""},
       galleryFilms: [],
       isLoading: true,
     },
@@ -71,29 +71,25 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
     }
   });
 
+  console.log(store.galleryFilms);
+
   return (
     <div className="artist-songmash">
-      <div onClick$={$((e: Event) => clickHandler(e, "left"))}>
-        {store.filmLeft.name}
-      </div>
-      {/* <ArtistTrackCard
-        track={store.trackLeft}
+      <FilmCard
+        film={store.filmLeft}
         clickHandler={$((e: Event) => clickHandler(e, "left"))}
         isVisible={store.isLoading ? "hidden" : "visible"}
-      /> */}
+      />
       {store.isLoading ? (
         <ArtistLoadingIcon />
       ) : (
         <div className="versus">vs.</div>
       )}
-      <div onClick$={$((e: Event) => clickHandler(e, "right"))}>
-        {store.filmRight.name}
-      </div>
-      {/* <ArtistTrackCard
-        track={store.trackRight}
+      <FilmCard
+        film={store.filmRight}
         clickHandler={$((e: Event) => clickHandler(e, "right"))}
         isVisible={store.isLoading ? "hidden" : "visible"}
-      /> */}
+      />
     </div>
   );
 });

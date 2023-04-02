@@ -1,45 +1,3 @@
-type Artist = {
-  name?: string;
-  nameRef: string;
-  playlistURL?: string;
-  bannerImg?: string;
-  avatarImg?: string;
-  activeYears?: string;
-  description?: string;
-  members?: [string];
-};
-
-type Artists = [Artist] | [];
-
-type Track = {
-  _id: string;
-  index?: number;
-  title?: string;
-  artist?: string;
-  release?: {
-    discType: string;
-    title: string;
-  };
-  year?: number;
-  duration?: string;
-  image?: string;
-  src?: string;
-  points?: number;
-};
-
-type Tracks = [Track] | [];
-
-interface IArtist {
-  artist: Artist;
-}
-
-type Mash = {
-  indexes: [Number];
-  artistRef: String;
-  leftWin: Number;
-  rightWin: Number;
-};
-
 type Gallery = {
   _id: string;
   user: string;
@@ -52,3 +10,20 @@ type Gallery = {
 };
 
 type Galleries = [Gallery] | []
+
+type Film = {
+  bannerImg?: string;
+  country?: string;
+  director?: string;
+  entryId?: string;
+  name?: string;
+  points: number;
+  posterImg?: string;
+  synopsis?: string;
+  year?: number;
+  youtubeSrc?: string;
+  _id: string;
+}
+
+type Films = [Film] | []
+

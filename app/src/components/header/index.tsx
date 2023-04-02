@@ -1,5 +1,5 @@
 import { component$, useStyles$ } from "@builder.io/qwik";
-import HeaderIcon from "../icon/header";
+import HeaderIcon from "../icon/Header";
 import HeaderStyles from "~/styles/header.css";
 
 const Header = component$(() => {

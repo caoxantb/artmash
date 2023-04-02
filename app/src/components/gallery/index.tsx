@@ -7,11 +7,10 @@ import {
 } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import ArtistStyles from "~/styles/artist.css";
-import FilmMash from "./songmash";
+import FilmMash from "./mash";
 import ArtistBio from "./overview";
 import ArtistRankings from "./rankings";
 import ArtistToggler from "./navigation";
-import artistService from "~/services/artist";
 import { getOneGallery } from "~/services/gallery";
 
 interface GalleryPageStore {
@@ -59,8 +58,7 @@ const ArtistPage = component$(() => {
         ) : store.toggle === "songmash" ? (
           <FilmMash gallery={store.gallery} />
         ) : (
-          <></>
-          // <ArtistRankings artist={store.artist} />
+          <ArtistRankings gallery={store.gallery}/>
         )}
       </div>
     </div>

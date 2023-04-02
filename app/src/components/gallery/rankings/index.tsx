@@ -2,31 +2,30 @@ import {
   component$,
   useStore,
   useClientEffect$,
-  useOnWindow,
   useWatch$,
   $,
 } from "@builder.io/qwik";
-import { ArtistRankingRow, ArtistRankingHead } from "./row";
-import trackService from "~/services/track";
-import { trackSort } from "~/helpers/track-sorting";
-import ArtistLoadingIcon from '../../icon/loading'
+import { FilmRankingHeader, FilmRankingRow } from "./Row";
+import { filmSort } from "~/utils/sort-film";
+import ArtistLoadingIcon from "../../icon/Loading";
+import { getAllFilmsInOneGallery } from "~/services/film";
 
-interface ArtistRankingsStore {
-  artistAllSongs: Tracks;
+interface FilmRankingStore {
+  allFilms: Films;
   sortBy: {
-    column: "score" | "track" | "release" | "duration";
-    direction: "asc" | "desc" | "none";
+    column: "score" | "film" | "year" | "director" | "country";
+    direction: "asc" | "desc";
   };
   isLoading: boolean;
 }
 
-const ArtistRankings = component$(({ artist }: IArtist) => {
-  const store: ArtistRankingsStore = useStore(
+const ArtistRankings = component$(({ gallery }: { gallery: Gallery }) => {
+  const store: FilmRankingStore = useStore(
     {
-      artistAllSongs: [],
+      allFilms: [],
       sortBy: {
         column: "score",
-        direction: "none",
+        direction: "desc",
       },
       isLoading: true,
     },
@@ -34,51 +33,32 @@ const ArtistRankings = component$(({ artist }: IArtist) => {
   );
 
   useClientEffect$(async () => {
-    store.artistAllSongs = await trackService.getAllTracksByArtist(
-      artist.nameRef
-    );
-    store.artistAllSongs = store.artistAllSongs.sort(
-      (track1, track2) => (track2.points || 0) - (track1.points || 0)
+    store.allFilms = await getAllFilmsInOneGallery(gallery._id);
+    store.allFilms = store.allFilms.sort(
+      (film1, film2) => (film2.points || 0) - (film1.points || 0)
     );
     store.isLoading = false;
   });
 
   useWatch$(({ track }) => {
     const sortMethod = track(() => store.sortBy);
-    store.artistAllSongs = trackSort(
-      store.artistAllSongs,
+    store.allFilms = filmSort(
+      store.allFilms,
       sortMethod.column,
       sortMethod.direction
     );
   });
 
   const sortHandler = $((col: any) => {
-    const directions: ["asc", "desc", "none"] = ["asc", "desc", "none"];
-    if (col === "score" && store.sortBy.direction === "none") {
-      store.sortBy = {
-        column: "score",
-        direction: "asc",
-      };
-      return;
-    }
     if (col === store.sortBy.column) {
       store.sortBy = {
         column: col,
-        direction:
-          directions[
-            directions.findIndex((dir) => dir === store.sortBy.direction) + 1
-          ],
+        direction: store.sortBy.direction === "asc" ? "desc" : "asc",
       };
-      if (store.sortBy.direction === "none") {
-        store.sortBy = {
-          column: "score",
-          direction: "none",
-        };
-      }
     } else {
       store.sortBy = {
         column: col,
-        direction: "asc",
+        direction: "desc",
       };
     }
   });
@@ -87,15 +67,15 @@ const ArtistRankings = component$(({ artist }: IArtist) => {
     <div className="artist-rankings">
       {!store.isLoading ? (
         <>
-          <ArtistRankingHead
+          <FilmRankingHeader
             innerWidth={window.innerWidth}
-            sortHandler={sortHandler}
             sortBy={store.sortBy}
+            sortHandler={sortHandler}
           />
-          {store.artistAllSongs.map((track, index) => {
+          {store.allFilms.map((film, index) => {
             return (
-              <ArtistRankingRow
-                track={track}
+              <FilmRankingRow
+                film={film}
                 index={index}
                 innerWidth={window.innerWidth}
               />

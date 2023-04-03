@@ -2,8 +2,8 @@ import { component$ } from "@builder.io/qwik";
 
 const Banner = component$(() => {
   return (
-    <div className="banner">
-      <div className="banner-title">song-mash</div>
+    <div class="banner">
+      <div class="banner-title">song-mash</div>
       <div>
         <p>
           Are we supposed to rank films since it is subjective? Probably not.

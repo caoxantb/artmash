@@ -7,7 +7,7 @@ interface HomeGalleriesProps {
 
 const HomeGalleries = component$(({ galleries }: HomeGalleriesProps) => {
   return (
-    <div className="artists-grid">
+    <div class="artists-grid">
       {galleries.map((gallery) => (
         <HomeGallery key={gallery._id} gallery={gallery} />
       ))}

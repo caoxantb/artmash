@@ -3,7 +3,7 @@ import {
   $,
   useStore,
   useSignal,
-  useClientEffect$,
+  useTask$,
 } from "@builder.io/qwik";
 import SortIcon from "../../icon/Sort";
 import { marked } from "marked";
@@ -28,25 +28,25 @@ type FilmRankingRowProps = Omit<FilmRankingProps, "sortHandler" | "sortBy">;
 export const FilmRankingHeader = component$(
   ({ innerWidth, sortHandler, sortBy }: FilmRankingHeadProps) => {
     return (
-      <div className="film-ranking film-ranking-head">
-        <div className="">#</div>
-        <div className="" onClick$={() => sortHandler("film")}>
+      <div class="film-ranking film-ranking-head">
+        <div class="">#</div>
+        <div class="" onClick$={() => sortHandler("film")}>
           Film <SortIcon sortBy={sortBy} type="film" />
         </div>
-        <div className="" onClick$={() => sortHandler("director")}>
+        <div class="" onClick$={() => sortHandler("director")}>
           Director(s) <SortIcon sortBy={sortBy} type="director" />
         </div>
         {innerWidth >= 768 && (
           <>
-            <div className="" onClick$={() => sortHandler("year")}>
+            <div class="" onClick$={() => sortHandler("year")}>
               Year <SortIcon sortBy={sortBy} type="year" />
             </div>
-            <div className="" onClick$={() => sortHandler("country")}>
+            <div class="" onClick$={() => sortHandler("country")}>
               Country <SortIcon sortBy={sortBy} type="country" />
             </div>
           </>
         )}
-        <div className="" onClick$={() => sortHandler("score")}>
+        <div class="" onClick$={() => sortHandler("score")}>
           Points <SortIcon sortBy={sortBy} type="score" />
         </div>
       </div>
@@ -62,7 +62,7 @@ export const FilmRankingRow = component$(
     });
     const accordionRef = useSignal<Element>();
 
-    useClientEffect$(() => {
+    useTask$(() => {
       if (accordionRef.value) {
         const posterHeight = (accordionRef.value.scrollWidth * 4) / 15;
         store.scrollHeight = Math.max(
@@ -75,25 +75,25 @@ export const FilmRankingRow = component$(
     return (
       <>
         <div
-          className="film-ranking film-ranking-row"
+          class="film-ranking film-ranking-row"
           onClick$={$(() => {
             store.isOpening = !store.isOpening;
           })}
         >
-          <div className="">{index + 1}</div>
-          <div className="">{film?.name}</div>
-          <div className="">{film?.director}</div>
+          <div class="">{index + 1}</div>
+          <div class="">{film?.name}</div>
+          <div class="">{film?.director}</div>
           {innerWidth >= 768 && (
             <>
               <div>{film?.year}</div>
               <div>{film?.country}</div>
             </>
           )}
-          <div className="">{film?.points}</div>
+          <div class="">{film?.points}</div>
         </div>
         <div
           ref={accordionRef}
-          className="film-accordion"
+          class="film-accordion"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${film?.bannerImg})`,
             backgroundSize: "cover",
@@ -103,24 +103,24 @@ export const FilmRankingRow = component$(
         >
           <div style={{padding: '20px', display: 'flex'}}>
             <img
-              className="film-poster"
+              class="film-poster"
               src={`${film?.posterImg}`}
               alt=""
               loading="lazy"
             ></img>
-            <div className="film-details">
-              <p className="film-title">{film.name?.toUpperCase()}</p>
-              <p className="film-dir-acc">
+            <div class="film-details">
+              <p class="film-title">{film.name?.toUpperCase()}</p>
+              <p class="film-dir-acc">
                 Directed by <b>{film?.director}</b>
               </p>
-              <p className="film-dir-acc">
+              <p class="film-dir-acc">
                 {film?.country}, {film?.year}
               </p>
               <div
                 dangerouslySetInnerHTML={`${sanitizeHtml(
                   marked.parse(film.synopsis || "")
                 )}`}
-                className="film-synopsis"
+                class="film-synopsis"
               ></div>
             </div>
           </div>

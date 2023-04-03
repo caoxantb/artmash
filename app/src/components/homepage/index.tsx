@@ -1,7 +1,7 @@
-import { component$, useStyles$, useStore, useMount$ } from "@builder.io/qwik";
+import { component$, useStyles$, useStore, useTask$ } from "@builder.io/qwik";
 import Banner from "./Banner";
 import HomeGalleries from "./HomeGalleries";
-import HomeStyles from "~/styles/home.css";
+import HomeStyles from "~/styles/home.css?inline";
 import { getAllGalleries } from "~/services/gallery";
 
 interface GalleriesGridStore {
@@ -15,15 +15,15 @@ const Home = component$(() => {
     {
       galleries: [],
     },
-    { recursive: true }
+    { deep: true }
   );
 
-  useMount$(async () => {
+  useTask$(async () => {
     store.galleries = await getAllGalleries();
   });
 
   return (
-    <div className="home">
+    <div class="home">
       <Banner />
       <HomeGalleries galleries={store.galleries} />
     </div>

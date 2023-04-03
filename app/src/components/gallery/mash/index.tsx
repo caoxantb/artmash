@@ -1,8 +1,7 @@
 import {
   component$,
-  useWatch$,
+  useResource$,
   useStore,
-  useClientEffect$,
   $,
 } from "@builder.io/qwik";
 import { calcEloRating } from "~/utils/elo-algorithm";
@@ -30,10 +29,10 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
       galleryFilms: [],
       isLoading: true,
     },
-    { recursive: true }
+    { deep: true }
   );
 
-  useClientEffect$(async () => {
+  useResource$(async () => {
     store.galleryFilms = await getAllFilmsInOneGallery(gallery._id);
     [store.indexLeft, store.indexRight] = randomizeSongs(
       store.galleryFilms.length
@@ -41,7 +40,7 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
     store.isLoading = false;
   });
 
-  useWatch$(async ({ track }) => {
+  useResource$(async ({ track }) => {
     const indexLeft = track(() => store.indexLeft);
     const indexRight = track(() => store.indexRight);
     store.filmLeft = store.galleryFilms[indexLeft];
@@ -74,7 +73,7 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
   console.log(store.galleryFilms);
 
   return (
-    <div className="artist-songmash">
+    <div class="artist-songmash">
       <FilmCard
         film={store.filmLeft}
         clickHandler={$((e: Event) => clickHandler(e, "left"))}
@@ -83,7 +82,7 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
       {store.isLoading ? (
         <ArtistLoadingIcon />
       ) : (
-        <div className="versus">vs.</div>
+        <div class="versus">vs.</div>
       )}
       <FilmCard
         film={store.filmRight}

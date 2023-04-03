@@ -1,6 +1,6 @@
 import { component$, useStyles$ } from "@builder.io/qwik";
 import HeaderIcon from "../icon/Header";
-import HeaderStyles from "~/styles/header.css";
+import HeaderStyles from "~/styles/header.css?inline";
 
 const Header = component$(() => {
   useStyles$(HeaderStyles);
@@ -9,7 +9,7 @@ const Header = component$(() => {
     <header>
       <a href="/">
         <HeaderIcon />
-        <span className="app-name"> SONGMASH </span>
+        <span class="app-name"> SONGMASH </span>
       </a>
     </header>
   );

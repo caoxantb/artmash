@@ -1,12 +1,12 @@
 import {
   component$,
   useStyles$,
-  useServerMount$,
+  useTask$,
   useStore,
   $,
 } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
-import ArtistStyles from "~/styles/artist.css";
+import ArtistStyles from "~/styles/artist.css?inline";
 import FilmMash from "./mash";
 import ArtistBio from "./overview";
 import ArtistRankings from "./rankings";
@@ -25,10 +25,10 @@ const ArtistPage = component$(() => {
 
   const store: GalleryPageStore = useStore(
     { gallery: { _id: "", user: "" }, toggle: "overview" },
-    { recursive: true }
+    { deep: true }
   );
 
-  useServerMount$(async () => {
+  useTask$(async () => {
     store.gallery = await getOneGallery(location.params.gallery);
   });
 
@@ -38,20 +38,20 @@ const ArtistPage = component$(() => {
 
   const clickHandler = $((e: any) => {
     store.toggle = e.target.id;
-    console.log(e.target.id);
+    console.log(store.toggle)
   });
 
   return (
-    <div className="artist-page">
+    <div class="artist-page">
       <div
-        className="artist-banner"
+        class="artist-banner"
         style={{
           background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), fixed url(${store.gallery.bannerImg}) center/cover no-repeat`,
         }}
       >
-        <p className="artist-main-title">{store.gallery.name?.toUpperCase()}</p>
+        <p class="artist-main-title">{store.gallery.name?.toUpperCase()}</p>
       </div>
-      <div className="artist-main-section">
+      <div class="artist-main-section">
         <ArtistToggler clickHandler={clickHandler} toggle={store.toggle} />
         {store.toggle === "overview" ? (
           <ArtistBio gallery={store.gallery} />

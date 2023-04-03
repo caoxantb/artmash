@@ -10,7 +10,7 @@ const FilmCard = component$(
   ({ film, clickHandler, isVisible }: FilmCardProps) => {
     return (
       <div
-        className="film-card"
+        class="film-card"
 				// eslint-disable-next-line qwik/valid-lexical-scope
 				onClick$={clickHandler}
         style={{
@@ -20,11 +20,11 @@ const FilmCard = component$(
         }}
       >
         <div>
-          <p className="film-country">
+          <p class="film-country">
             {film?.country}, {film?.year}
           </p>
-          <p className="film-name">{film?.name}</p>
-          <p className="film-dir">DIRECTED BY <b>{film?.director}</b></p>
+          <p class="film-name">{film?.name}</p>
+          <p class="film-dir">DIRECTED BY <b>{film?.director}</b></p>
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-import { component$, QRL} from "@builder.io/qwik";
+import { component$, type QRL} from "@builder.io/qwik";
 
 interface ArtistTogglerProps {
   clickHandler: QRL<(e: any) => void>;
@@ -7,10 +7,10 @@ interface ArtistTogglerProps {
 
 const ArtistToggler = component$(({ clickHandler, toggle }: ArtistTogglerProps) => {
   return (
-    <div className="artist-toggler">
+    <div class="artist-toggler">
       <div
         id="overview"
-        className={`artist-toggle-section ${
+        class={`artist-toggle-section ${
           toggle === "overview" ? "active" : ""
         }`}
         onClick$={clickHandler}
@@ -19,7 +19,7 @@ const ArtistToggler = component$(({ clickHandler, toggle }: ArtistTogglerProps) 
       </div>
       <div
         id="songmash"
-        className={`artist-toggle-section ${
+        class={`artist-toggle-section ${
           toggle === "songmash" ? "active" : ""
         }`}
         onClick$={clickHandler}
@@ -28,7 +28,7 @@ const ArtistToggler = component$(({ clickHandler, toggle }: ArtistTogglerProps) 
       </div>
       <div
         id="rankings"
-        className={`artist-toggle-section ${
+        class={`artist-toggle-section ${
           toggle === "rankings" ? "active" : ""
         }`}
         onClick$={clickHandler}

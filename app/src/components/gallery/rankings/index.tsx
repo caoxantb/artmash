@@ -1,8 +1,7 @@
 import {
   component$,
   useStore,
-  useClientEffect$,
-  useWatch$,
+  useResource$,
   $,
 } from "@builder.io/qwik";
 import { FilmRankingHeader, FilmRankingRow } from "./Row";
@@ -29,10 +28,10 @@ const ArtistRankings = component$(({ gallery }: { gallery: Gallery }) => {
       },
       isLoading: true,
     },
-    { recursive: true }
+    { deep: true }
   );
 
-  useClientEffect$(async () => {
+  useResource$(async () => {
     store.allFilms = await getAllFilmsInOneGallery(gallery._id);
     store.allFilms = store.allFilms.sort(
       (film1, film2) => (film2.points || 0) - (film1.points || 0)
@@ -40,7 +39,7 @@ const ArtistRankings = component$(({ gallery }: { gallery: Gallery }) => {
     store.isLoading = false;
   });
 
-  useWatch$(({ track }) => {
+  useResource$(({ track }) => {
     const sortMethod = track(() => store.sortBy);
     store.allFilms = filmSort(
       store.allFilms,
@@ -64,7 +63,7 @@ const ArtistRankings = component$(({ gallery }: { gallery: Gallery }) => {
   });
 
   return (
-    <div className="artist-rankings">
+    <div class="artist-rankings">
       {!store.isLoading ? (
         <>
           <FilmRankingHeader

@@ -14,5 +14,10 @@ export default defineConfig(() => {
       tsconfigPaths(),
       netlifyEdge({ functionName: "entry.netlify-edge" }),
     ],
+    preview: {
+      headers: {
+        'Cache-Control': 'public, max-age=600',
+      },
+    },
   };
 });

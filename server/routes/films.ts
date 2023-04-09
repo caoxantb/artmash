@@ -1,13 +1,10 @@
 import express from "express";
-import {
-  deleteAnFilm,
-  getAllFilmsInOneGallery,
-  getOneFilm,
-  updateFilmPoints,
-} from "../controllers/films";
+import { filmsController } from "../controllers";
 import { getAuthorizedUser } from "../utils/token";
 
 const filmsRouter = express.Router();
+const { getAllFilmsInOneGallery, getOneFilm, updateFilmPoints, deleteAnFilm } =
+  filmsController;
 
 filmsRouter.get(
   "/:galleryId",
@@ -33,7 +30,7 @@ filmsRouter.put(
       req.params.galleryId,
       req.body.points
     );
-    res.json(film)
+    res.json(film);
   }
 );
 
@@ -42,10 +39,7 @@ filmsRouter.delete(
   async (req: express.Request, res: express.Response) => {
     const user = await getAuthorizedUser(req, res);
 
-    const deleted = await deleteAnFilm(
-      req.params.filmId,
-      user._id.toString()
-    );
+    const deleted = await deleteAnFilm(req.params.filmId, user._id.toString());
     if (deleted === null) {
       return res.status(401).json({
         error: "unauthorized action",

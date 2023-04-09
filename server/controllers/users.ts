@@ -57,4 +57,4 @@ const getUser = async (username: string) => {
   return user;
 };
 
-export { signIn, signUp, getUser };
+export default { signIn, signUp, getUser };

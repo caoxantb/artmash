@@ -74,4 +74,9 @@ const deleteAnFilm = async (filmId: string, userId: string) => {
   await Film.findByIdAndDelete(filmId);
 };
 
-export { getAllFilmsInOneGallery, getOneFilm, updateFilmPoints, deleteAnFilm };
+export default {
+  getAllFilmsInOneGallery,
+  getOneFilm,
+  updateFilmPoints,
+  deleteAnFilm,
+};

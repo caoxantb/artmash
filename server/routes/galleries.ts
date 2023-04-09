@@ -1,13 +1,10 @@
 import express from "express";
-import {
-  createGallery,
-  deleteOneGallery,
-  getAllGalleries,
-  getOneGallery,
-} from "../controllers/galleries";
+import { galleriesController } from "../controllers";
 import { getAuthorizedUser } from "../utils/token";
 
 const galleriesRouter = express.Router();
+const { createGallery, deleteOneGallery, getAllGalleries, getOneGallery } =
+  galleriesController;
 
 galleriesRouter.post(
   "/",

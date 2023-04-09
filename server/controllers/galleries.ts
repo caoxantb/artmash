@@ -88,4 +88,9 @@ const deleteOneGallery = async (id: string, userId: string) => {
   return true;
 };
 
-export { createGallery, getAllGalleries, getOneGallery, deleteOneGallery };
+export default {
+  createGallery,
+  getAllGalleries,
+  getOneGallery,
+  deleteOneGallery,
+};

@@ -67,10 +67,11 @@ const FilmRanking = component$(({ gallery }: { gallery: Gallery }) => {
             sortHandler={sortHandler}
           />
           {store.allFilms.map((film, index) => {
+            console.log(film)
             return (
               <FilmRankingRow
                 film={film}
-                key={film._id}
+                key={index}
                 index={index}
                 innerWidth={window.innerWidth}
               />

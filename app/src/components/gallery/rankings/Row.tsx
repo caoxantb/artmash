@@ -1,4 +1,4 @@
-import { component$, $, useStore, useSignal, useTask$ } from "@builder.io/qwik";
+import { component$, $, useStore, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import { SortIcon } from "../../icon";
@@ -57,7 +57,7 @@ export const FilmRankingRow = component$(
     });
     const accordionRef = useSignal<Element>();
 
-    useTask$(() => {
+    useVisibleTask$(() => {
       if (accordionRef.value) {
         const posterHeight = (accordionRef.value.scrollWidth * 4) / 15;
         store.scrollHeight = Math.max(

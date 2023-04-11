@@ -1,7 +1,7 @@
-import { component$, useStyles$, useStore, useTask$ } from "@builder.io/qwik";
+import { component$, useStore, useTask$ } from "@builder.io/qwik";
+import { StyledHome } from "../styled/home.css";
 import Banner from "./Banner";
 import HomeGalleries from "./HomeGalleries";
-import HomeStyles from "~/styles/home.css?inline";
 import { getAllGalleries } from "~/services/gallery";
 
 interface GalleriesGridStore {
@@ -9,8 +9,6 @@ interface GalleriesGridStore {
 }
 
 const Home = component$(() => {
-  useStyles$(HomeStyles);
-
   const store: GalleriesGridStore = useStore(
     {
       galleries: [],
@@ -23,10 +21,10 @@ const Home = component$(() => {
   });
 
   return (
-    <div class="home">
+    <StyledHome>
       <Banner />
       <HomeGalleries galleries={store.galleries} />
-    </div>
+    </StyledHome>
   );
 });
 

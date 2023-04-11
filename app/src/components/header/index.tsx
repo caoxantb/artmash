@@ -1,17 +1,15 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import { HeaderIcon } from "../icon";
-import HeaderStyles from "~/styles/header.css?inline";
+import { StyledHeader, HeaderLink, HeaderName } from "../styled/header.css";
 
 const Header = component$(() => {
-  useStyles$(HeaderStyles);
-
   return (
-    <header>
-      <a href="/">
+    <StyledHeader>
+      <HeaderLink href="/">
         <HeaderIcon />
-        <span class="app-name"> SONGMASH </span>
-      </a>
-    </header>
+        <HeaderName> SONGMASH </HeaderName>
+      </HeaderLink>
+    </StyledHeader>
   );
 });
 

@@ -1,4 +1,5 @@
 import { component$ } from "@builder.io/qwik";
+import { StyledGalleries } from "../styled/home.css";
 import HomeGallery from "./HomeGallery";
 
 interface HomeGalleriesProps {
@@ -7,11 +8,11 @@ interface HomeGalleriesProps {
 
 const HomeGalleries = component$(({ galleries }: HomeGalleriesProps) => {
   return (
-    <div class="artists-grid">
+    <StyledGalleries>
       {galleries.map((gallery) => (
         <HomeGallery key={gallery._id} gallery={gallery} />
       ))}
-    </div>
+    </StyledGalleries>
   );
 });
 

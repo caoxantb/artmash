@@ -1,11 +1,11 @@
 import { component$, type QRL} from "@builder.io/qwik";
 
-interface ArtistTogglerProps {
+interface NavigatorProps {
   clickHandler: QRL<(e: any) => void>;
   toggle: 'overview' | 'songmash' | 'rankings'
 }
 
-const ArtistToggler = component$(({ clickHandler, toggle }: ArtistTogglerProps) => {
+const Navigator = component$(({ clickHandler, toggle }: NavigatorProps) => {
   return (
     <div class="artist-toggler">
       <div
@@ -39,4 +39,4 @@ const ArtistToggler = component$(({ clickHandler, toggle }: ArtistTogglerProps) 
   );
 });
 
-export default ArtistToggler;
+export default Navigator;

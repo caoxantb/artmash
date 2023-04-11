@@ -10,7 +10,7 @@ import ArtistStyles from "~/styles/artist.css?inline";
 import FilmMash from "./mash";
 import ArtistBio from "./overview";
 import ArtistRankings from "./rankings";
-import ArtistToggler from "./navigation";
+import Navigator from "./Navigator";
 import { getOneGallery } from "~/services/gallery";
 
 interface GalleryPageStore {
@@ -52,7 +52,7 @@ const ArtistPage = component$(() => {
         <p class="artist-main-title">{store.gallery.name?.toUpperCase()}</p>
       </div>
       <div class="artist-main-section">
-        <ArtistToggler clickHandler={clickHandler} toggle={store.toggle} />
+        <Navigator clickHandler={clickHandler} toggle={store.toggle} />
         {store.toggle === "overview" ? (
           <ArtistBio gallery={store.gallery} />
         ) : store.toggle === "songmash" ? (

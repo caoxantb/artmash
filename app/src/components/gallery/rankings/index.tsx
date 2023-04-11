@@ -75,6 +75,7 @@ const ArtistRankings = component$(({ gallery }: { gallery: Gallery }) => {
             return (
               <FilmRankingRow
                 film={film}
+                key={film._id}
                 index={index}
                 innerWidth={window.innerWidth}
               />

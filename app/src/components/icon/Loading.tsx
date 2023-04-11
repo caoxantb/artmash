@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 
-const ArtistLoadingIcon = component$(() => {
+const LoadingIcon = component$(() => {
   return (
     <div class="music-loader">
     <span></span>
@@ -16,4 +16,4 @@ const ArtistLoadingIcon = component$(() => {
   );
 });
 
-export default ArtistLoadingIcon;
+export default LoadingIcon;

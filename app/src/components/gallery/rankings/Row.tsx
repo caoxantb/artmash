@@ -1,13 +1,8 @@
-import {
-  component$,
-  $,
-  useStore,
-  useSignal,
-  useTask$,
-} from "@builder.io/qwik";
-import SortIcon from "../../icon/Sort";
+import { component$, $, useStore, useSignal, useTask$ } from "@builder.io/qwik";
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
+import { SortIcon } from "../../icon";
+
 interface FilmRankingProps {
   film: Film;
   index: number;
@@ -101,7 +96,7 @@ export const FilmRankingRow = component$(
             maxHeight: store.isOpening ? `${store.scrollHeight + 40}px` : "0px",
           }}
         >
-          <div style={{padding: '20px', display: 'flex'}}>
+          <div style={{ padding: "20px", display: "flex" }}>
             <img
               class="film-poster"
               src={`${film?.posterImg}`}

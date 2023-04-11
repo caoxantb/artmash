@@ -1,4 +1,4 @@
-export const randomizeSongs = (length: number) => {
+export const randomizeFilm = (length: number) => {
   let indexRight: number;
   const indexLeft = Math.floor(Math.random() * length);
   do {

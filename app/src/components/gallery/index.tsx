@@ -6,11 +6,11 @@ import {
   $,
 } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
-import ArtistStyles from "~/styles/artist.css?inline";
-import FilmMash from "./mash";
-import ArtistBio from "./overview";
-import ArtistRankings from "./rankings";
 import Navigator from "./Navigator";
+import GalleryOverview from "./overview";
+import FilmMash from "./mash";
+import FilmRanking from "./rankings";
+import ArtistStyles from "~/styles/artist.css?inline";
 import { getOneGallery } from "~/services/gallery";
 
 interface GalleryPageStore {
@@ -18,7 +18,7 @@ interface GalleryPageStore {
   toggle: "overview" | "songmash" | "rankings";
 }
 
-const ArtistPage = component$(() => {
+const GalleryPage = component$(() => {
   useStyles$(ArtistStyles);
 
   const location = useLocation();
@@ -38,7 +38,7 @@ const ArtistPage = component$(() => {
 
   const clickHandler = $((e: any) => {
     store.toggle = e.target.id;
-    console.log(store.toggle)
+    console.log(store.toggle);
   });
 
   return (
@@ -54,15 +54,15 @@ const ArtistPage = component$(() => {
       <div class="artist-main-section">
         <Navigator clickHandler={clickHandler} toggle={store.toggle} />
         {store.toggle === "overview" ? (
-          <ArtistBio gallery={store.gallery} />
+          <GalleryOverview gallery={store.gallery} />
         ) : store.toggle === "songmash" ? (
           <FilmMash gallery={store.gallery} />
         ) : (
-          <ArtistRankings gallery={store.gallery}/>
+          <FilmRanking gallery={store.gallery} />
         )}
       </div>
     </div>
   );
 });
 
-export default ArtistPage;
+export default GalleryPage;

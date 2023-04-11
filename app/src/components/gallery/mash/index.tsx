@@ -1,14 +1,8 @@
-import {
-  component$,
-  useResource$,
-  useStore,
-  $,
-} from "@builder.io/qwik";
-import { calcEloRating } from "~/utils/elo-algorithm";
-import ArtistLoadingIcon from "../../icon/Loading";
-import { randomizeSongs } from "~/utils/random-song";
-import { getAllFilmsInOneGallery, updateFilmPoints } from "~/services/film";
+import { component$, useResource$, useStore, $ } from "@builder.io/qwik";
 import FilmCard from "./FilmCard";
+import { LoadingIcon } from "../../icon";
+import { getAllFilmsInOneGallery, updateFilmPoints } from "~/services/film";
+import { calcEloRating, randomizeFilm } from "~/utils";
 
 interface FilmmashStore {
   indexLeft: number;
@@ -24,8 +18,8 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
     {
       indexLeft: 0,
       indexRight: 0,
-      filmLeft: {points: 0, _id: ""},
-      filmRight: {points: 0, _id: ""},
+      filmLeft: { points: 0, _id: "" },
+      filmRight: { points: 0, _id: "" },
       galleryFilms: [],
       isLoading: true,
     },
@@ -34,7 +28,7 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
 
   useResource$(async () => {
     store.galleryFilms = await getAllFilmsInOneGallery(gallery._id);
-    [store.indexLeft, store.indexRight] = randomizeSongs(
+    [store.indexLeft, store.indexRight] = randomizeFilm(
       store.galleryFilms.length
     );
     store.isLoading = false;
@@ -63,7 +57,7 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
       await updateFilmPoints(gallery._id, store.filmRight._id, rightPoints);
 
       store.galleryFilms = await getAllFilmsInOneGallery(gallery._id);
-      [store.indexLeft, store.indexRight] = randomizeSongs(
+      [store.indexLeft, store.indexRight] = randomizeFilm(
         store.galleryFilms.length
       );
       store.isLoading = false;
@@ -79,11 +73,7 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
         clickHandler={$((e: Event) => clickHandler(e, "left"))}
         isVisible={store.isLoading ? "hidden" : "visible"}
       />
-      {store.isLoading ? (
-        <ArtistLoadingIcon />
-      ) : (
-        <div class="versus">vs.</div>
-      )}
+      {store.isLoading ? <LoadingIcon /> : <div class="versus">vs.</div>}
       <FilmCard
         film={store.filmRight}
         clickHandler={$((e: Event) => clickHandler(e, "right"))}

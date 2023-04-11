@@ -1,13 +1,8 @@
-import {
-  component$,
-  useStore,
-  useResource$,
-  $,
-} from "@builder.io/qwik";
+import { component$, useStore, useResource$, $ } from "@builder.io/qwik";
 import { FilmRankingHeader, FilmRankingRow } from "./Row";
-import { filmSort } from "~/utils/sort-film";
-import ArtistLoadingIcon from "../../icon/Loading";
+import { LoadingIcon } from "../../icon";
 import { getAllFilmsInOneGallery } from "~/services/film";
+import { filmSort } from "~/utils";
 
 interface FilmRankingStore {
   allFilms: Films;
@@ -18,7 +13,7 @@ interface FilmRankingStore {
   isLoading: boolean;
 }
 
-const ArtistRankings = component$(({ gallery }: { gallery: Gallery }) => {
+const FilmRanking = component$(({ gallery }: { gallery: Gallery }) => {
   const store: FilmRankingStore = useStore(
     {
       allFilms: [],
@@ -83,10 +78,10 @@ const ArtistRankings = component$(({ gallery }: { gallery: Gallery }) => {
           })}
         </>
       ) : (
-        <ArtistLoadingIcon />
+        <LoadingIcon />
       )}
     </div>
   );
 });
 
-export default ArtistRankings;
+export default FilmRanking;

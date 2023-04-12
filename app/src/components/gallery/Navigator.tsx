@@ -1,41 +1,36 @@
-import { component$, type QRL} from "@builder.io/qwik";
+import { component$, type QRL } from "@builder.io/qwik";
+import { GalleryToggle, StyledNavigator, active } from "../styled/gallery.css";
 
 interface NavigatorProps {
   clickHandler: QRL<(e: any) => void>;
-  toggle: 'overview' | 'songmash' | 'rankings'
+  toggle: "overview" | "mash" | "rankings";
 }
 
 const Navigator = component$(({ clickHandler, toggle }: NavigatorProps) => {
   return (
-    <div class="artist-toggler">
-      <div
+    <StyledNavigator>
+      <GalleryToggle
         id="overview"
-        class={`artist-toggle-section ${
-          toggle === "overview" ? "active" : ""
-        }`}
+        class={toggle === "overview" ? active : ""}
         onClick$={clickHandler}
       >
         OVERVIEW
-      </div>
-      <div
-        id="songmash"
-        class={`artist-toggle-section ${
-          toggle === "songmash" ? "active" : ""
-        }`}
+      </GalleryToggle>
+      <GalleryToggle
+        id="mash"
+        class={toggle === "mash" ? active : ""}
         onClick$={clickHandler}
       >
         SONG • MASH
-      </div>
-      <div
+      </GalleryToggle>
+      <GalleryToggle
         id="rankings"
-        class={`artist-toggle-section ${
-          toggle === "rankings" ? "active" : ""
-        }`}
+        class={toggle === "rankings" ? active : ""}
         onClick$={clickHandler}
       >
         RANKINGS
-      </div>
-    </div>
+      </GalleryToggle>
+    </StyledNavigator>
   );
 });
 

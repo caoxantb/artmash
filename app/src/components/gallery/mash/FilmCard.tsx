@@ -1,4 +1,5 @@
 import { component$ } from "@builder.io/qwik";
+import { StyledFilmCard, FilmName, FilmCountry, FilmDirector } from "~/components/styled/mash.css";
 
 interface FilmCardProps {
   film: any;
@@ -9,9 +10,7 @@ interface FilmCardProps {
 const FilmCard = component$(
   ({ film, clickHandler, isVisible }: FilmCardProps) => {
     return (
-      <div
-        class="film-card"
-				// eslint-disable-next-line qwik/valid-lexical-scope
+      <StyledFilmCard
 				onClick$={clickHandler}
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${film?.bannerImg})`,
@@ -20,13 +19,13 @@ const FilmCard = component$(
         }}
       >
         <div>
-          <p class="film-country">
+          <FilmCountry>
             {film?.country}, {film?.year}
-          </p>
-          <p class="film-name">{film?.name}</p>
-          <p class="film-dir">DIRECTED BY <b>{film?.director}</b></p>
+          </FilmCountry>
+          <FilmName>{film?.name}</FilmName>
+          <FilmDirector>DIRECTED BY <b>{film?.director}</b></FilmDirector>
         </div>
-      </div>
+      </StyledFilmCard>
     );
   }
 );

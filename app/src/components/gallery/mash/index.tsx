@@ -3,6 +3,7 @@ import FilmCard from "./FilmCard";
 import { LoadingIcon } from "../../icon";
 import { getAllFilmsInOneGallery, updateFilmPoints } from "~/services/film";
 import { calcEloRating, randomizeFilm } from "~/utils";
+import { StyledMash } from "~/components/styled/mash.css";
 
 interface FilmmashStore {
   indexLeft: number;
@@ -67,7 +68,7 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
   console.log(store.galleryFilms);
 
   return (
-    <div class="artist-songmash">
+    <StyledMash>
       <FilmCard
         film={store.filmLeft}
         clickHandler={$((e: Event) => clickHandler(e, "left"))}
@@ -79,7 +80,7 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
         clickHandler={$((e: Event) => clickHandler(e, "right"))}
         isVisible={store.isLoading ? "hidden" : "visible"}
       />
-    </div>
+    </StyledMash>
   );
 });
 

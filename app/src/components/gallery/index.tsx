@@ -12,10 +12,15 @@ import FilmMash from "./mash";
 import FilmRanking from "./rankings";
 import ArtistStyles from "~/styles/artist.css?inline";
 import { getOneGallery } from "~/services/gallery";
+import {
+  GalleryBanner,
+  GallerySection,
+  GalleryTitle,
+} from "../styled/gallery.css";
 
 interface GalleryPageStore {
   gallery: Gallery;
-  toggle: "overview" | "songmash" | "rankings";
+  toggle: "overview" | "mash" | "rankings";
 }
 
 const GalleryPage = component$(() => {
@@ -42,26 +47,25 @@ const GalleryPage = component$(() => {
   });
 
   return (
-    <div class="artist-page">
-      <div
-        class="artist-banner"
+    <>
+      <GalleryBanner
         style={{
           background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), fixed url(${store.gallery.bannerImg}) center/cover no-repeat`,
         }}
       >
-        <p class="artist-main-title">{store.gallery.name?.toUpperCase()}</p>
-      </div>
-      <div class="artist-main-section">
+        <GalleryTitle>{store.gallery.name?.toUpperCase()}</GalleryTitle>
+      </GalleryBanner>
+      <GallerySection>
         <Navigator clickHandler={clickHandler} toggle={store.toggle} />
         {store.toggle === "overview" ? (
           <GalleryOverview gallery={store.gallery} />
-        ) : store.toggle === "songmash" ? (
+        ) : store.toggle === "mash" ? (
           <FilmMash gallery={store.gallery} />
         ) : (
           <FilmRanking gallery={store.gallery} />
         )}
-      </div>
-    </div>
+      </GallerySection>
+    </>
   );
 });
 

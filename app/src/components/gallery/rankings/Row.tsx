@@ -1,6 +1,7 @@
 import { component$, $, useStore, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
+import { StyledRow, RowAccordion, AccordionWrap, FilmPoster, FilmRowInfo, FilmRowName, FilmRowSynopsis } from "~/components/styled/rankings.css";
 import { SortIcon } from "../../icon";
 
 interface FilmRankingProps {
@@ -23,28 +24,28 @@ type FilmRankingRowProps = Omit<FilmRankingProps, "sortHandler" | "sortBy">;
 export const FilmRankingHeader = component$(
   ({ innerWidth, sortHandler, sortBy }: FilmRankingHeadProps) => {
     return (
-      <div class="film-ranking film-ranking-head">
-        <div class="">#</div>
-        <div class="" onClick$={() => sortHandler("film")}>
+      <StyledRow>
+        <div>#</div>
+        <div onClick$={() => sortHandler("film")}>
           Film <SortIcon sortBy={sortBy} type="film" />
         </div>
-        <div class="" onClick$={() => sortHandler("director")}>
+        <div onClick$={() => sortHandler("director")}>
           Director(s) <SortIcon sortBy={sortBy} type="director" />
         </div>
         {innerWidth >= 768 && (
           <>
-            <div class="" onClick$={() => sortHandler("year")}>
+            <div onClick$={() => sortHandler("year")}>
               Year <SortIcon sortBy={sortBy} type="year" />
             </div>
-            <div class="" onClick$={() => sortHandler("country")}>
+            <div onClick$={() => sortHandler("country")}>
               Country <SortIcon sortBy={sortBy} type="country" />
             </div>
           </>
         )}
-        <div class="" onClick$={() => sortHandler("score")}>
+        <div onClick$={() => sortHandler("score")}>
           Points <SortIcon sortBy={sortBy} type="score" />
         </div>
-      </div>
+      </StyledRow>
     );
   }
 );
@@ -69,8 +70,7 @@ export const FilmRankingRow = component$(
 
     return (
       <>
-        <div
-          class="film-ranking film-ranking-row"
+        <StyledRow
           onClick$={$(() => {
             store.isOpening = !store.isOpening;
           })}
@@ -85,10 +85,9 @@ export const FilmRankingRow = component$(
             </>
           )}
           <div class="">{film?.points}</div>
-        </div>
-        <div
+        </StyledRow>
+        <RowAccordion
           ref={accordionRef}
-          class="film-accordion"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${film?.bannerImg})`,
             backgroundSize: "cover",
@@ -96,30 +95,30 @@ export const FilmRankingRow = component$(
             maxHeight: store.isOpening ? `${store.scrollHeight + 40}px` : "0px",
           }}
         >
-          <div style={{ padding: "20px", display: "flex" }}>
-            <img
+          <AccordionWrap>
+            <FilmPoster
               class="film-poster"
               src={`${film?.posterImg}`}
               alt=""
               loading="lazy"
-            ></img>
-            <div class="film-details">
-              <p class="film-title">{film.name?.toUpperCase()}</p>
-              <p class="film-dir-acc">
+            />
+            <div>
+              <FilmRowName>{film.name?.toUpperCase()}</FilmRowName>
+              <FilmRowInfo>
                 Directed by <b>{film?.director}</b>
-              </p>
-              <p class="film-dir-acc">
+              </FilmRowInfo>
+              <FilmRowInfo>
                 {film?.country}, {film?.year}
-              </p>
-              <div
+              </FilmRowInfo>
+              <FilmRowSynopsis
                 dangerouslySetInnerHTML={`${sanitizeHtml(
                   marked.parse(film.synopsis || "")
                 )}`}
                 class="film-synopsis"
-              ></div>
+              />
             </div>
-          </div>
-        </div>
+          </AccordionWrap>
+        </RowAccordion>
       </>
     );
   }

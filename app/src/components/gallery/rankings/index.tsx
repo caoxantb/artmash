@@ -1,4 +1,5 @@
 import { component$, useStore, useResource$, $ } from "@builder.io/qwik";
+import { StyledRankings } from "~/components/styled/rankings.css";
 import { FilmRankingHeader, FilmRankingRow } from "./Row";
 import { LoadingIcon } from "../../icon";
 import { getAllFilmsInOneGallery } from "~/services/film";
@@ -58,7 +59,7 @@ const FilmRanking = component$(({ gallery }: { gallery: Gallery }) => {
   });
 
   return (
-    <div class="artist-rankings">
+    <StyledRankings>
       {!store.isLoading ? (
         <>
           <FilmRankingHeader
@@ -67,7 +68,6 @@ const FilmRanking = component$(({ gallery }: { gallery: Gallery }) => {
             sortHandler={sortHandler}
           />
           {store.allFilms.map((film, index) => {
-            console.log(film)
             return (
               <FilmRankingRow
                 film={film}
@@ -81,7 +81,7 @@ const FilmRanking = component$(({ gallery }: { gallery: Gallery }) => {
       ) : (
         <LoadingIcon />
       )}
-    </div>
+    </StyledRankings>
   );
 });
 

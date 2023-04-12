@@ -2,9 +2,11 @@ import { styled } from "styled-vanilla-extract/qwik";
 
 export const StyledHeader = styled.header`
   background-color: beige;
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
-  padding: 10px 0;
+  padding: 10px 5%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 export const HeaderLink = styled.a`
@@ -19,4 +21,13 @@ export const HeaderName = styled.span`
   margin-left: 10px;
   font-size: 24px;
   font-weight: 800;
+`;
+
+export const HeaderLogin = styled.a`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
 `;

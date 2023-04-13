@@ -32,7 +32,7 @@ export const HeaderLogin = styled.a`
   color: black;
 `;
 
-export const HeaderAvatar = styled.div`
+export const HeaderAvatar = styled.a`
   display: flex;
   justify-content: end;
   align-items: center;

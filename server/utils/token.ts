@@ -4,7 +4,7 @@ import { User } from "../models";
 export const getAuthorizedUser = async (request: any, response: any) => {
   const authorization = request.get("authorization");
   const token =
-    authorization && authorization.toLowerCase().startsWith("Bearer ")
+    authorization && authorization.toLowerCase().startsWith("bearer ")
       ? authorization.substring(7)
       : "";
 

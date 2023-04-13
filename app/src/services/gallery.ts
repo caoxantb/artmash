@@ -7,11 +7,17 @@ const createGallery = async (
   contentTypeFilmsId: string,
   environmentId: string
 ) => {
+  let token;
+  const user = window.localStorage.getItem("loggedUser");
+  if (user) {
+    token = JSON.parse(user).token;
+  }
   const res = await fetch(`${galleryAPI}`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       spaceId,
@@ -74,7 +80,13 @@ const deleteOneGallery = async (galleryId: string) => {
     },
     credentials: "include",
   });
-	return await res.json()
+  return await res.json();
 };
 
-export { createGallery, getAllGalleries, getUserGallery, getOneGallery, deleteOneGallery };
+export {
+  createGallery,
+  getAllGalleries,
+  getUserGallery,
+  getOneGallery,
+  deleteOneGallery,
+};

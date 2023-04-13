@@ -32,10 +32,10 @@ const Header = component$(() => {
         <HeaderIcon />
         <HeaderName> FILMMASH </HeaderName>
       </HeaderLink>
-      {!store.user ? (
+      {!store.user.username ? (
         <HeaderLogin href="/login">Login</HeaderLogin>
       ) : (
-        <HeaderAvatar>
+        <HeaderAvatar href={`/user/${store.user.username}`}>
           <AvatarLog src="https://ionicframework.com/docs/img/demos/avatar.svg" />
         </HeaderAvatar>
       )}

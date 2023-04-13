@@ -1,9 +1,9 @@
 import { component$, useResource$, useStore, $ } from "@builder.io/qwik";
 import FilmCard from "./FilmCard";
+import { StyledMash, Versus } from "~/components/styled/mash.css";
 import { LoadingIcon } from "../../icon";
 import { getAllFilmsInOneGallery, updateFilmPoints } from "~/services/film";
 import { calcEloRating, randomizeFilm } from "~/utils";
-import { StyledMash } from "~/components/styled/mash.css";
 
 interface FilmmashStore {
   indexLeft: number;
@@ -65,8 +65,6 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
     }
   });
 
-  console.log(store.galleryFilms);
-
   return (
     <StyledMash>
       <FilmCard
@@ -74,7 +72,7 @@ const FilmMash = component$(({ gallery }: { gallery: Gallery }) => {
         clickHandler={$((e: Event) => clickHandler(e, "left"))}
         isVisible={store.isLoading ? "hidden" : "visible"}
       />
-      {store.isLoading ? <LoadingIcon /> : <div class="versus">vs.</div>}
+      {store.isLoading ? <LoadingIcon /> : <Versus class="versus">vs.</Versus>}
       <FilmCard
         film={store.filmRight}
         clickHandler={$((e: Event) => clickHandler(e, "right"))}

@@ -31,3 +31,14 @@ export const HeaderLogin = styled.a`
   text-decoration: none;
   color: black;
 `;
+
+export const HeaderAvatar = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+`;
+
+export const AvatarLog = styled.img`
+  height: 40px;
+  border-radius: 50%;
+`;

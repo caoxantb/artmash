@@ -21,7 +21,7 @@ const Navigator = component$(({ clickHandler, toggle }: NavigatorProps) => {
         class={toggle === "mash" ? active : ""}
         onClick$={clickHandler}
       >
-        SONG • MASH
+        FILM • MASH
       </GalleryToggle>
       <GalleryToggle
         id="rankings"

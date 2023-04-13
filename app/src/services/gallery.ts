@@ -33,7 +33,6 @@ const getAllGalleries = async () => {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8",
     },
-    credentials: "include",
   });
 
   const galleries = await res.json();

@@ -9,7 +9,7 @@ const { createGallery, deleteOneGallery, getAllGalleries, getOneGallery } =
 galleriesRouter.post(
   "/",
   async (req: express.Request, res: express.Response) => {
-    const user = await getAuthorizedUser(req, res);
+    const user = await getAuthorizedUser(req, res)
 
     const {
       spaceId,
@@ -57,22 +57,22 @@ galleriesRouter.get(
   }
 );
 
-galleriesRouter.delete(
-  ":/galleryId",
-  async (req: express.Request, res: express.Response) => {
-    const user = await getAuthorizedUser(req, res);
+// galleriesRouter.delete(
+//   ":/galleryId",
+//   async (req: express.Request, res: express.Response) => {
+//     const user = await getAuthorizedUser(req, res);
 
-    const deleted = await deleteOneGallery(
-      req.params.galleryId,
-      user._id.toString()
-    );
-    if (deleted === null) {
-      return res.status(401).json({
-        error: "unauthorized action",
-      });
-    }
-    res.status(204).json();
-  }
-);
+//     const deleted = await deleteOneGallery(
+//       req.params.galleryId,
+//       user._id.toString()
+//     );
+//     if (deleted === null) {
+//       return res.status(401).json({
+//         error: "unauthorized action",
+//       });
+//     }
+//     res.status(204).json();
+//   }
+// );
 
 export default galleriesRouter;

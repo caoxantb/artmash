@@ -40,3 +40,12 @@ export const FilmName = styled.p`
   font-weight: 900;
   margin: 0px;
 `;
+
+export const Versus = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+  font-weight: 700;
+  margin: 20px 0;
+`;

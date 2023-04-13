@@ -7,7 +7,6 @@ const getUser = async (username: string) => {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8",
     },
-    credentials: "include",
   });
   const user = await res.json();
   return user;
@@ -25,11 +24,12 @@ const signUp = async (
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8",
     },
-    body: JSON.stringify({ name, username, password, avatarImg }),
     credentials: "include",
+    body: JSON.stringify({ name, username, password, avatarImg }),
   });
-  const status = await res.json();
-  return status;
+  const user = await res.json();
+
+  return user;
 };
 
 const signIn = async (username: string, password: string) => {
@@ -42,8 +42,8 @@ const signIn = async (username: string, password: string) => {
     body: JSON.stringify({ username, password }),
     credentials: "include",
   });
-  const status = await res.json();
-  return status;
+  const user = await res.json();
+  return user;
 };
 
 export { getUser, signIn, signUp };

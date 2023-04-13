@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import "express-async-errors";
 import cors from "cors";
-import cookieParser from "cookie-parser";
+import cookieParser from 'cookie-parser';
 
 //middlewares
 import { MONGODB_URI } from "./utils/config";
@@ -26,10 +26,11 @@ mongoose
     console.error("error connecting to MongoDB", er.message);
   });
 
-app.use(cors({ credentials: true }));
 app.use(cookieParser());
+app.use(cors({ credentials: true, origin: true}));
 app.use(express.json());
 app.use(requestLogger);
+
 
 app.use("/api/users", usersRouter);
 app.use("/api/galleries", galleriesRouter);

@@ -1,16 +1,9 @@
-import {
-  component$,
-  useStyles$,
-  useTask$,
-  useStore,
-  $,
-} from "@builder.io/qwik";
+import { component$, useTask$, useStore, $ } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import Navigator from "./Navigator";
 import GalleryOverview from "./overview";
 import FilmMash from "./mash";
 import FilmRanking from "./rankings";
-import ArtistStyles from "~/styles/artist.css?inline";
 import { getOneGallery } from "~/services/gallery";
 import {
   GalleryBanner,
@@ -24,8 +17,6 @@ interface GalleryPageStore {
 }
 
 const GalleryPage = component$(() => {
-  useStyles$(ArtistStyles);
-
   const location = useLocation();
 
   const store: GalleryPageStore = useStore(
@@ -43,7 +34,6 @@ const GalleryPage = component$(() => {
 
   const clickHandler = $((e: any) => {
     store.toggle = e.target.id;
-    console.log(store.toggle);
   });
 
   return (

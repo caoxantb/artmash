@@ -4,7 +4,7 @@ import express from "express";
 const requestLogger = (
   req: express.Request,
   _res: express.Response,
-  next: express.Next
+  next: any
 ) => {
   console.log("Method:", req.method);
   console.log("Path:  ", req.path);
@@ -18,10 +18,10 @@ const unknownEndpoint = (_req: express.Request, res: express.Response) => {
 };
 
 const errorHandler = (
-  error: express.error,
+  error: any,
   req: express.Request,
   res: express.Response,
-  next: express.Next
+  next: any
 ) => {
   console.error(error.message);
   next(error);

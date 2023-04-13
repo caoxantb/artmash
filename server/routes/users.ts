@@ -17,13 +17,8 @@ usersRouter.post(
   async (req: express.Request, res: express.Response) => {
     const { name, username, password, avatarImg } = req.body;
     const createdUser = await signUp({ name, username, password, avatarImg });
-    const token = await signIn({ username, password });
-    res.status(201).json(createdUser);
-    res.cookie("access_token", token, {
-      maxAge: 365 * 24 * 60 * 60 * 100,
-      httpOnly: true,
-    });
-    res.status(200).json({ ok: true });
+    const [token, user] = await signIn({ username, password });
+    res.status(200).send({ token, username, name, avatarImg });
   }
 );
 
@@ -31,17 +26,20 @@ usersRouter.post(
   "/signin",
   async (req: express.Request, res: express.Response) => {
     const { username, password } = req.body;
-    const token = await signIn({ username, password });
+    const [token, user] = await signIn({ username, password });
     if (!token) {
       return res.status(401).json({
         error: "invalid username or password",
       });
     }
-    res.cookie("access_token", token, {
-      maxAge: 365 * 24 * 60 * 60 * 100,
-      httpOnly: true,
-    });
-    res.status(200).json({ ok: true });
+    res
+      .status(200)
+      .send({
+        token,
+        username: user.username,
+        name: user.username,
+        avatarImg: user.avatarImg,
+      });
   }
 );
 

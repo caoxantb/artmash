@@ -16,8 +16,8 @@ usersRouter.post(
   "/signup",
   async (req: express.Request, res: express.Response) => {
     const { name, username, password, avatarImg } = req.body;
-    const createdUser = await signUp({ name, username, password, avatarImg });
-    const [token, user] = await signIn({ username, password });
+    const _createdUser = await signUp({ name, username, password, avatarImg });
+    const [token, _user] = await signIn({ username, password });
     res.status(200).send({ token, username, name, avatarImg });
   }
 );

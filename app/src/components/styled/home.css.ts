@@ -50,6 +50,7 @@ export const CardImage = styled.img`
   border-radius: 50%;
   margin-bottom: 20px;
   aspect-ratio: 1 / 1;
+  object-fit: cover;
 `;
 
 export const CardName = styled.p`

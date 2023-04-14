@@ -23,6 +23,7 @@ export const AvatarImage = styled.img`
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   display: block;
+  object-fit: cover;
 `;
 
 export const GalleryName = styled.p`

@@ -36,7 +36,7 @@ const Header = component$(() => {
         <HeaderLogin href="/login">Login</HeaderLogin>
       ) : (
         <HeaderAvatar href={`/user/${store.user.username}`}>
-          <AvatarLog src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          <AvatarLog src={`${store.user.avatarImg}`} />
         </HeaderAvatar>
       )}
     </StyledHeader>

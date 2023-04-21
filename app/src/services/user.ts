@@ -1,4 +1,4 @@
-const userAPI = "http://localhost:8500/api/users";
+const userAPI = "https://filmmash.vercel.app/api/users";
 
 const getUser = async (username: string) => {
   const res = await fetch(`${userAPI}/${username}`, {

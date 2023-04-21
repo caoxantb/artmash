@@ -1,4 +1,4 @@
-const filmAPI = "http://localhost:8500/api/films";
+const filmAPI = "https://filmmash.vercel.app/api/films";
 
 const getAllFilmsInOneGallery = async (galleryId: string) => {
   const res = await fetch(`${filmAPI}/${galleryId}`, {

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "name": "filmmash",
+  "builds": [
+     { "src": "index.ts", "use": "@vercel/node" }
+  ],
+  "routes": [
+     { "src": "/(.*)", "dest": "/index.ts" }
+  ]
+}
